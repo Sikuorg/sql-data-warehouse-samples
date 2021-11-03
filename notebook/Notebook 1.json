@@ -1,0 +1,148 @@
+{
+	"name": "Notebook 1",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "Sikuapache",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "56g",
+			"driverCores": 8,
+			"executorMemory": "56g",
+			"executorCores": 8,
+			"numExecutors": 2,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "e0b1dd34-9daf-46e5-a785-eb035ce94878"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"synapse_widget": {
+				"version": "0.1"
+			},
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_spark",
+				"display_name": "Synapse Spark"
+			},
+			"language_info": {
+				"name": "scala"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/7f5e751a-4c60-4ad9-86fb-0d56b4734647/resourceGroups/sikurg/providers/Microsoft.Synapse/workspaces/sikuwsp/bigDataPools/Sikuapache",
+				"name": "Sikuapache",
+				"type": "Spark",
+				"endpoint": "https://sikuwsp.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/Sikuapache",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net"
+				},
+				"sparkVersion": "2.4",
+				"nodeCount": 10,
+				"cores": 8,
+				"memory": 56,
+				"extraHeader": null
+			}
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"outputs_hidden": true
+					}
+				},
+				"source": [
+					"// Read  the table we just created in the sql pool as a Spark dataframe\r\n",
+					"// Write the dataframe into your sql pool\r\n",
+					"import org.apache.spark.sql.SqlAnalyticsConnector._\r\n",
+					"import com.microsoft.spark.sqlanalytics.utils.Constants\r\n",
+					"\r\n",
+					"val sql_pool_name = \"Sikupool\" //fill in your sql pool name\r\n",
+					"//val sqlpwd= \"Mypassword1\"\r\n",
+					"\r\n",
+					"\r\n",
+					"val updatesDF = spark.read.\r\n",
+					"option(Constants.SERVER, \"sikuwsp.sql.azuresynapse.net\").\r\n",
+					"option(Constants.USER, \"sirak\").\r\n",
+					"option(Constants.PASSWORD, \"Mypassword1\" ).\r\n",
+					"sqlanalytics(s\"$sql_pool_name.dbo.test\")\r\n",
+					"\r\n",
+					"updatesDF.show(5, truncate = false)\r\n",
+					"//synapsesql\r\n",
+					"//val updatesDF = spark.read.\r\n",
+					"    //synapsesql(s\"$sql_pool_name.wwi_mcw.SaleSmall_1M\")\r\n",
+					"//updatesDF.createOrReplaceTempView(\"updates\")"
+				],
+				"attachments": null,
+				"execution_count": 5
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"\r\n",
+					"a_df.write.\r\n",
+					"    option(Constants.DATA_SOURCE, \"Sprktest_for_Sparktest1\").\r\n",
+					"    option(Constants.FILE_FORMAT, \"Parquet_forspark1\").\r\n",
+					"    synapsesql(\"Sikupool.dbo.Spark_Test1\", Constants.EXTERNAL)"
+				],
+				"attachments": null,
+				"execution_count": 45
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"df.write.synapsesql(\"Sikupool.dbo.Spak_test_table\", Constants.INTERNAL)"
+				],
+				"attachments": null,
+				"execution_count": 37
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"val a_df = spark.sql(\"SELECT * from nyctaxi.trip\")"
+				],
+				"attachments": null,
+				"execution_count": 38
+			}
+		]
+	}
+}

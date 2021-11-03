@@ -1,0 +1,17 @@
+{
+	"name": "FileServer1",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "FileServer",
+		"typeProperties": {
+			"host": "C:\\Users\\m1060919\\OneDrive - Mindtree Limited\\Documents\\Machine back up\\Admin\\Smaple files",
+			"userId": "M1060919@mindtree.com",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJiNDZhYmQ2YS03NmIzLTRiZDEtYjMwNC1hNjQ2ODliMzQ3NGQiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "IntegrationRuntime1",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

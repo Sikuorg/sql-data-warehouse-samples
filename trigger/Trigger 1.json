@@ -1,0 +1,24 @@
+{
+	"name": "Trigger 1",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "CopyPipeline_ym3",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathEndsWith": "Siku",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/7f5e751a-4c60-4ad9-86fb-0d56b4734647/resourceGroups/sikurg/providers/Microsoft.Storage/storageAccounts/sikadls",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}

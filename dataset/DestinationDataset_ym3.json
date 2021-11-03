@@ -1,0 +1,23 @@
+{
+	"name": "DestinationDataset_ym3",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sikuwsp-WorkspaceDefaultStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "FromSharepoint",
+				"fileSystem": "sikufile"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

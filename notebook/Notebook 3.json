@@ -1,0 +1,115 @@
+{
+	"name": "Notebook 3",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "Sikuapache",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "56g",
+			"driverCores": 8,
+			"executorMemory": "56g",
+			"executorCores": 8,
+			"numExecutors": 2,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "5195945c-9a41-47a7-a2aa-66ff6a2e2a18"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"synapse_widget": {
+				"version": "0.1"
+			},
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "Synapse PySpark"
+			},
+			"language_info": {
+				"name": "scala"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/7f5e751a-4c60-4ad9-86fb-0d56b4734647/resourceGroups/sikurg/providers/Microsoft.Synapse/workspaces/sikuwsp/bigDataPools/Sikuapache",
+				"name": "Sikuapache",
+				"type": "Spark",
+				"endpoint": "https://sikuwsp.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/Sikuapache",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net"
+				},
+				"sparkVersion": "2.4",
+				"nodeCount": 10,
+				"cores": 8,
+				"memory": 56,
+				"extraHeader": null
+			}
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"metadata": {
+					"microsoft": {
+						"language": "python"
+					}
+				},
+				"source": [
+					"%%pyspark\n",
+					"spark.sql(\"create table date_table (\n",
+					"col2 datetime)\n",
+					"insert into date_table values ('2021/10/27 10:23:15')\")"
+				],
+				"attachments": null,
+				"execution_count": 8
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"val df_datetime = spark.read.synapsesql(\"sikupool.dbo.date_table\")\r\n",
+					"df_datetime.createOrReplaceTempView(\"Temporary_date_table\")"
+				],
+				"attachments": null,
+				"execution_count": 16
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"microsoft": {
+						"language": "scala"
+					}
+				},
+				"source": [
+					"%%spark\r\n",
+					"val scala_df = spark.sqlContext.sql (\"select * from date_table\")\r\n",
+					"scala_df.write.synapsesql(\"Sikupool.dbo.date_table\", Constants.INTERNAL)"
+				],
+				"attachments": null,
+				"execution_count": 26
+			}
+		]
+	}
+}
